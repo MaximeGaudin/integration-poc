@@ -2,6 +2,7 @@ package com.mgaudin.sample.integration;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
+import org.reflections.scanners.SubTypesScanner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class ReflectionConfiguration {
     @Bean
     public Reflections getReflectionEngine() {
-        return new Reflections(this.getClass().getPackage().getName(), new FieldAnnotationsScanner());
+        return new Reflections(this.getClass().getPackage().getName(),
+                new FieldAnnotationsScanner(),
+                new SubTypesScanner());
     }
 }

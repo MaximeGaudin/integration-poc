@@ -32,7 +32,11 @@ public class ApiRouteBuilder extends SpringRouteBuilder {
                 .processRef("badRequestProcessor");
 
         from("restlet:http://localhost:8080/{CamelResourceType}/{CamelResourceId}?restletMethod=get")
-                .to("seda:readResource");
+                .to("seda:readResource")
+                .to("seda:serializeResource");
+
+        from("seda:serializeResource")
+                .log("TODO");
     }
 
     private class ExposedEndpointPredicate implements Predicate {
